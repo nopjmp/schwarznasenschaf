@@ -12,7 +12,7 @@ export default class EventHandler {
     eventFiles.forEach((file) => {
       import(`./${file}`).then(({default: Event}) => {
         const event = new Event(client)
-        client.on(event.name, (...args) => event.handle(...args))
+        client.on(event.name, async (...args) => await event.handle(...args))
       }).catch((error) => console.error(`Failed to load event at: ${file}\n${error}`))
     })
   }

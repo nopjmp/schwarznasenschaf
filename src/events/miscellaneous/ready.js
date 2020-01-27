@@ -6,7 +6,7 @@ export default class ReadyEvent {
     this.client = client
   }
 
-  handle() {
+  async handle() {
     this.client.user.setActivity(`${Config.prefix}help`, { type: 'LISTENING' })
     console.log('Ready!')
   }

@@ -5,7 +5,7 @@ export default class guildMemberAddEvent {
     this.name = 'guildMemberAdd'
   }
 
-  handle(member) {
+  async handle(member) {
     let channel = member.guild.channels.get(Config.loggingChannels.memberships)
     channel.send(`${member.user.tag}, with id \`${member.user.id}\`, has joined the server.`)
 

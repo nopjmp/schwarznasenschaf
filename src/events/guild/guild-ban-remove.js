@@ -5,7 +5,7 @@ export default class guildBanRemoveEvent {
     this.name = 'guildBanRemove'
   }
 
-  handle(guild, user) {
+  async handle(guild, user) {
     const channel = guild.channels.get(Config.loggingChannels.memberships)
     channel.send(`${user.tag}, with id \`${user.id}\`, has been unbanned.`)
   }
