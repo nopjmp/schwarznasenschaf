@@ -1,4 +1,4 @@
-import Jimp from 'jimp'
+import Jimp from 'jimp/es'
 import jsQR from 'jsqr'
 
 import Config from 'config'
@@ -18,10 +18,10 @@ export default class messageEvent {
       return width > 0 && height > 0
     })
 
-    for (const image of attachments) {
+    for (const [ , attachment ] of attachments) {
       try {
-        const imageData = await Jimp.read(image.url)
-        const result = jsQR(imageData.bitmap, imageData.getWidth(), imageData.getHeight(), { inversionAttempts: "dontInvert" })
+        const { bitmap } = await Jimp.read(attachment.url)
+        const result = jsQR(bitmap.data, bitmap.width, bitmap.height, { inversionAttempts: "dontInvert" })
 
         if (result != null && result.data.startsWith("https://discordapp.com/ra/")) {
           const channel = message.channel.guild.channels.get(Config.loggingChannels.messages)
