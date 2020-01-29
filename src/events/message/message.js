@@ -18,7 +18,7 @@ export default class messageEvent {
       return width > 0 && height > 0
     })
 
-    for (const [ , attachment ] of attachments) {
+    for (const [, attachment] of attachments) {
       try {
         const { bitmap } = await Jimp.read(attachment.url)
         const result = jsQR(bitmap.data, bitmap.width, bitmap.height, { inversionAttempts: "dontInvert" })
@@ -26,7 +26,7 @@ export default class messageEvent {
         if (result != null && result.data.startsWith("https://discordapp.com/ra/")) {
           const channel = message.channel.guild.channels.get(Config.loggingChannels.messages)
           channel.send(`${message.author.tag}, with id \`${message.author.id}\`, has sent malicious login url qr code  `)
-          
+
           message.delete()
         }
       } catch (e) {
