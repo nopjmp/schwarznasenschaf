@@ -10,7 +10,7 @@ export default class messageEvent {
 
   async handle(message) {
     // ignore DMs
-    if (!message.channel.guild) return
+    if (!message.channel.guild) { return }
 
     var attachments = message.attachments.filter(e => {
       const width = e.width || 0
